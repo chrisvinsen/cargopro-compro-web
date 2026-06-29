@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../config/site';
+
+const num = siteConfig.contact.whatsapp.primary.number;
+const stages = [
+  { t: 'Masuk Gudang China', d: 'Barang diterima, diukur, & disortir di gudang konsolidasi.' },
+  { t: 'Diberangkatkan', d: 'Dimuat ke kapal laut atau pesawat terbang.' },
+  { t: 'Tiba di Indonesia', d: 'Kapal/pesawat merapat di pelabuhan atau bandara tujuan.' },
+  { t: 'Proses Clearance', d: 'Pengurusan dokumen & izin oleh tim clearance kami.' },
+  { t: 'Terkirim', d: 'Barang aman sampai di tangan Anda.' },
+];
+---
+
+<BaseLayout
+  title="Lacak Kiriman Import China | CargoPro"
+  description="Lacak status kiriman import Anda dari China ke Indonesia. Masukkan nomor resi CargoPro dan pantau posisi terkini."
+  keywords="lacak kiriman china, cek resi import china, tracking kargo china indonesia"
+  path="/lacak"
+>
+  <!-- ── HERO (CENTERED TRACKING) ────────────────────────────────────── -->
+  <section class="pt-32 md:pt-48 pb-24 md:pb-32 bg-paper px-4 md:px-8 relative overflow-hidden text-center min-h-[70vh] flex flex-col justify-center border-b border-line/30">
+    <!-- Ambient Background Glows -->
+    <div class="absolute top-0 right-1/4 w-[500px] h-[500px] bg-orange/5 rounded-full blur-[100px] -translate-y-1/2 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-[#d4af37]/5 rounded-full blur-[100px] translate-y-1/2 pointer-events-none"></div>
+
+    <div class="max-w-[1360px] mx-auto relative z-10 w-full fade-up">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm shadow-sm border border-orange/10 text-orange text-sm font-bold tracking-wider mb-8 uppercase">
+        Live Tracking
+      </div>
+      
+      <h1 class="font-display font-black leading-[1.1] text-ink mb-6 text-[clamp(2.5rem,5vw,4.5rem)] tracking-tight">
+        Lacak <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#e7c96a] to-[#b5952f]">Kiriman Anda</span>
+      </h1>
+      
+      <p class="text-muted text-lg md:text-xl font-medium leading-relaxed max-w-2xl mx-auto mb-12">
+        Ketahui posisi terkini barang import Anda. Masukkan nomor resi atau marking gudang di bawah ini.
+      </p>
+
+      <!-- Tracking Form Container -->
+      <div class="max-w-2xl mx-auto relative group">
+        <div class="absolute inset-0 bg-gradient-to-r from-orange/20 via-[#e7c96a]/20 to-orange/20 rounded-[28px] blur-xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+        
+        <form id="lacakForm" class="relative bg-white/80 backdrop-blur-xl border border-line/60 p-2 md:p-3 rounded-[28px] shadow-2xl shadow-ink/5 flex flex-col sm:flex-row gap-3" data-wa={num}>
+          <label for="resi" class="sr-only">Nomor Resi atau Marking</label>
+          <div class="relative flex-1 flex items-center">
+            <span class="absolute left-6 text-orange">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </span>
+            <input id="resi" name="resi" type="text" required placeholder="Contoh: TE-2406-1234" class="w-full bg-transparent border-none outline-none pl-16 pr-6 py-4 text-ink font-display font-bold text-lg placeholder:font-medium placeholder:text-muted/50" />
+          </div>
+          
+          <button type="submit" class="bg-gradient-to-r from-[#e7c96a] to-[#b5952f] text-ink hover:text-white font-bold text-lg py-4 px-10 rounded-[20px] shadow-lg shadow-orange/20 hover:shadow-orange/30 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 shrink-0 group/btn">
+            Lacak
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="group-hover/btn:translate-x-1 transition-transform"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+      </div>
+      <p class="text-sm font-medium text-muted mt-6 text-center">Belum memiliki resi? Resi diterbitkan setelah barang diukur di gudang konsolidasi.</p>
+
+      <!-- Premium Result Block (Mock API) -->
+      <div id="lacakResult" class="hidden mt-12 max-w-2xl mx-auto p-6 md:p-8 rounded-[32px] bg-white border border-line/60 shadow-xl shadow-ink/5 text-left fade-up d1 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-orange/5 rounded-bl-[100px] pointer-events-none"></div>
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 relative z-10">
+          <div class="w-16 h-16 rounded-2xl bg-orange/10 flex items-center justify-center shrink-0 text-orange">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-display font-black text-ink mb-2 text-2xl">Resi Belum Ditemukan</h3>
+            <p class="text-muted leading-relaxed mb-5">
+              Data resi atau marking yang Anda masukkan belum tersedia di sistem mandiri kami. Silakan hubungi CS untuk bantuan pelacakan manual.
+            </p>
+            <button type="button" id="btnHubungiCS" class="inline-flex items-center gap-2 text-orange font-bold hover:text-ink transition-colors group/link">
+              Hubungi CS via WhatsApp
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="group-hover/link:translate-x-1 transition-transform"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── JOURNEY STAGES (BENTO GRID) ───────────────────────────────── -->
+  <section class="py-20 md:py-32 bg-sand/30">
+    <div class="max-w-[1360px] mx-auto px-4 md:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
+        <p class="font-display font-bold text-sm uppercase tracking-[0.2em] text-orange mb-4">Perjalanan Kiriman</p>
+        <h2 class="font-display font-black text-[clamp(2.5rem,4vw,3.5rem)] text-ink leading-tight mb-6">Alur Proses <span class="text-gradient-gold">Import</span></h2>
+      </div>
+      
+      <ol class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+        {stages.map((s, i) => (
+          <li class="bg-white p-8 rounded-[32px] shadow-sm border border-line/60 hover:border-orange/30 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden fade-up" class:list={[`d${(i % 5) + 1}`]}>
+            
+            <div class="absolute -right-4 -bottom-4 font-display font-black text-[120px] leading-none text-sand/50 group-hover:text-orange/5 transition-colors duration-500 pointer-events-none select-none">
+              0{i + 1}
+            </div>
+
+            <div class="relative z-10">
+              <span class="inline-block px-3 py-1 bg-orange/10 text-orange font-bold text-sm rounded-full mb-6 group-hover:bg-gradient-to-r group-hover:from-[#e7c96a] group-hover:to-[#b5952f] group-hover:text-white transition-all duration-300">
+                Tahap {i + 1}
+              </span>
+              <h3 class="font-display font-bold text-xl text-ink mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#e7c96a] group-hover:to-[#b5952f] transition-all">{s.t}</h3>
+              <p class="text-muted text-[0.95rem] leading-relaxed">{s.d}</p>
+            </div>
+            
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <script is:inline>
+    (() => {
+      const f = document.getElementById('lacakForm');
+      const res = document.getElementById('lacakResult');
+      const btnWa = document.getElementById('btnHubungiCS');
+      
+      if (!f || !res || !btnWa) return;
+      
+      f.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const resi = (document.getElementById('resi')?.value || '').trim();
+        if (!resi) { f.reportValidity(); return; }
+        
+        // Show premium result block instead of directly redirecting
+        res.classList.remove('hidden');
+        // Trigger animation
+        setTimeout(() => res.classList.add('show'), 10);
+      });
+
+      btnWa.addEventListener('click', () => {
+        const num = f.getAttribute('data-wa');
+        const resi = (document.getElementById('resi')?.value || '').trim();
+        const msg = `Halo CargoPro, mohon bantu cek status kiriman saya dengan resi/marking: ${resi}`;
+        window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`, '_blank');
+      });
+    })();
+  </script>
+</BaseLayout>

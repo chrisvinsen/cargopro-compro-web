@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { insights, insightCategories } from '../../data/insights';
+
+const title = "Insights & Berita | CargoPro";
+const description = "Temukan berbagai panduan import, berita logistik terbaru, dan tips bisnis dari CargoPro.";
+
+const featured = insights.length > 0 ? insights[0] : null;
+const remaining = insights.length > 1 ? insights.slice(1) : [];
+---
+
+<BaseLayout title={title} description={description} path="/insights">
+  <!-- ── HERO SECTION ────────────────────────────────────────────────── -->
+  <section class="pt-28 md:pt-40 pb-16 md:pb-24 bg-paper px-4 md:px-8 overflow-hidden relative border-b border-line/30">
+    <div class="absolute top-0 right-1/4 w-[400px] h-[400px] bg-orange/5 rounded-full blur-[100px] -translate-y-1/2 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-1/4 w-[300px] h-[300px] bg-[#d4af37]/5 rounded-full blur-[100px] translate-y-1/2 pointer-events-none"></div>
+
+    <div class="max-w-[1360px] mx-auto text-center relative z-10 fade-up">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm shadow-sm border border-orange/10 text-orange text-sm font-bold tracking-wider mb-6 uppercase">
+        Pusat Edukasi & Informasi
+      </div>
+      <h1 class="font-display font-black leading-[1.05] text-ink text-[clamp(2.5rem,5vw,4.5rem)] tracking-tight mb-6 max-w-4xl mx-auto">
+        Insights & Berita <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#e7c96a] to-[#b5952f]">CargoPro</span>
+      </h1>
+      <p class="text-muted text-lg md:text-xl font-medium leading-relaxed max-w-2xl mx-auto">
+        Kumpulan panduan import, update regulasi, dan strategi bisnis untuk membantu Anda mengambil keputusan logistik yang lebih baik.
+      </p>
+    </div>
+  </section>
+
+  <section class="pb-24 md:pb-32 bg-sand/30 pt-16 relative">
+    <div class="max-w-[1360px] mx-auto px-4 md:px-8">
+      
+      <!-- ── CATEGORY FILTERS ────────────────────────────────────────── -->
+      <div class="flex flex-wrap items-center justify-center gap-3 mb-16 fade-up">
+        <span class="px-6 py-3 rounded-full bg-ink text-white font-bold text-sm shadow-sm cursor-default transition-all">Semua</span>
+        {insightCategories.map(cat => (
+          <span class="px-6 py-3 rounded-full bg-white border border-line/60 text-muted font-bold text-sm hover:border-orange/50 hover:text-orange hover:shadow-sm transition-all cursor-default">{cat}</span>
+        ))}
+      </div>
+
+      <!-- ── FEATURED ARTICLE ────────────────────────────────────────── -->
+      {featured && (
+        <div class="mb-16 fade-up d1">
+          <a href={`/insights/${featured.slug}`} class="group grid lg:grid-cols-[1.2fr_1fr] gap-0 bg-white rounded-[40px] overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-orange/10 border border-line/60 transition-all duration-500">
+            <!-- Image Side -->
+            <div class="relative aspect-[4/3] lg:aspect-auto overflow-hidden">
+              <div class="absolute inset-0 bg-orange/20 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+              <img 
+                src={featured.image} 
+                alt={`Thumbnail artikel ${featured.title}`} 
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                loading="lazy" 
+                decoding="async" 
+              />
+              <div class="absolute top-6 left-6 z-20 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-orange tracking-wider uppercase shadow-sm">
+                {featured.category}
+              </div>
+            </div>
+            
+            <!-- Text Side -->
+            <div class="p-8 md:p-12 lg:p-16 flex flex-col justify-center relative">
+              <div class="absolute top-0 right-0 w-40 h-40 bg-orange/5 rounded-bl-full pointer-events-none transition-colors group-hover:bg-orange/10 duration-500"></div>
+              
+              <time class="block text-sm text-muted font-bold tracking-widest uppercase mb-4">
+                {new Date(featured.date).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </time>
+              
+              <h2 class="font-display font-black text-3xl md:text-4xl leading-[1.1] mb-6 text-ink group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#e7c96a] group-hover:to-[#b5952f] transition-all">
+                {featured.title}
+              </h2>
+              
+              <p class="text-lg text-muted leading-relaxed line-clamp-3 mb-10 max-w-lg">
+                {featured.excerpt}
+              </p>
+              
+              <div class="mt-auto inline-flex items-center gap-2 text-ink font-display font-bold group-hover:text-orange transition-colors">
+                Baca Selengkapnya
+                <span class="w-10 h-10 rounded-full bg-sand flex items-center justify-center text-ink group-hover:bg-orange group-hover:text-white transition-colors ml-2">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="group-hover:translate-x-1 transition-transform"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </div>
+            </div>
+          </a>
+        </div>
+      )}
+
+      <!-- ── ARTICLES GRID (BENTO STYLE) ─────────────────────────────── -->
+      {remaining.length > 0 && (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {remaining.map((article, i) => (
+            <article class={`bg-white rounded-[32px] border border-line/60 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-orange/5 hover:border-orange/20 hover:-translate-y-2 transition-all duration-500 fade-up flex flex-col group`} class:list={[`d${(i % 4) + 1}`]}>
+              <a href={`/insights/${article.slug}`} class="block relative aspect-[16/10] overflow-hidden">
+                <img 
+                  src={article.image} 
+                  alt={`Thumbnail artikel ${article.title}`} 
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                  loading="lazy" 
+                  decoding="async" 
+                  width="400"
+                  height="250"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full text-xs font-bold text-ink tracking-wider uppercase shadow-sm">
+                  {article.category}
+                </div>
+              </a>
+              
+              <div class="p-8 md:p-10 flex-1 flex flex-col relative bg-white">
+                <time class="block text-xs text-orange font-bold tracking-widest uppercase mb-3">
+                  {new Date(article.date).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
+                </time>
+                
+                <h3 class="font-display font-black text-2xl leading-tight mb-4 text-ink group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#e7c96a] group-hover:to-[#b5952f] transition-all">
+                  <a href={`/insights/${article.slug}`} class="focus:outline-none before:absolute before:inset-0">{article.title}</a>
+                </h3>
+                
+                <p class="text-muted leading-relaxed line-clamp-3 mb-8 flex-1">
+                  {article.excerpt}
+                </p>
+                
+                <div class="mt-auto pt-6 border-t border-line/60 inline-flex items-center justify-between w-full relative z-10">
+                  <span class="text-sm font-display font-bold text-ink group-hover:text-orange transition-colors">Baca Artikel</span>
+                  <span class="w-8 h-8 rounded-full bg-sand flex items-center justify-center text-ink group-hover:bg-orange group-hover:text-white transition-colors">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="group-hover:translate-x-0.5 transition-transform"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+
+      <!-- ── EMPTY STATE ─────────────────────────────────────────────── -->
+      {insights.length === 0 && (
+        <div class="py-24 text-center max-w-lg mx-auto fade-up d1 bg-white rounded-[40px] border border-line/60 p-12 shadow-sm">
+          <div class="w-24 h-24 bg-orange/5 border border-orange/10 rounded-full flex items-center justify-center mx-auto mb-8 text-orange">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          </div>
+          <h3 class="font-display font-black text-3xl text-ink mb-4">Belum Ada Artikel</h3>
+          <p class="text-muted text-lg leading-relaxed">
+            Saat ini kami sedang menyiapkan konten edukasi dan berita terbaru seputar logistik untuk Anda. Nantikan update selanjutnya!
+          </p>
+        </div>
+      )}
+      
+    </div>
+  </section>
+</BaseLayout>

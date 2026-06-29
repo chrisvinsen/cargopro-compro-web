@@ -1,0 +1,242 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import { siteConfig } from '../../config/site';
+import { services, categoryLabel } from '../../data/services';
+
+export function getStaticPaths() {
+  return services.map((s) => ({ params: { slug: s.slug }, props: { service: s } }));
+}
+
+const { service } = Astro.props;
+const s = service;
+const related = services.filter((x) => x.category === s.category && x.slug !== s.slug).slice(0, 3);
+const wa = `https://wa.me/${siteConfig.contact.whatsapp.primary.number}?text=${encodeURIComponent(`Halo CargoPro, saya ingin penawaran untuk layanan ${s.name}.`)}`;
+
+const path = `/layanan/${s.slug}`;
+const url = new URL(path, siteConfig.url).href;
+const jsonld = [
+  {
+    '@type': 'Service',
+    name: s.name,
+    serviceType: s.group,
+    description: s.tagline,
+    url,
+    provider: { '@id': `${siteConfig.url}/#organization` },
+    areaServed: { '@type': 'Country', name: 'Indonesia' },
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: siteConfig.url },
+      { '@type': 'ListItem', position: 2, name: 'Layanan', item: `${siteConfig.url}/layanan` },
+      { '@type': 'ListItem', position: 3, name: s.name, item: url },
+    ],
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: s.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<BaseLayout title={s.meta.title} description={s.meta.description} keywords={s.meta.keywords} path={path} jsonld={jsonld} preload={s.image}>
+  <!-- ── HERO ─────────────────────────────────────────────────────────── -->
+  <section class="pt-24 md:pt-32 pb-16 md:pb-24 bg-paper px-4 md:px-8 overflow-hidden relative border-b border-line/30">
+    <!-- Ambient Glows -->
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-orange/5 rounded-full blur-[100px] pointer-events-none"></div>
+    
+    <div class="max-w-[1360px] mx-auto relative z-10">
+      <nav aria-label="Breadcrumb" class="flex items-center gap-2 text-sm text-muted mb-10 fade-up font-medium">
+        <a href="/" class="hover:text-orange transition-colors">Beranda</a>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="opacity-50"><path d="m9 18 6-6-6-6"/></svg>
+        <a href="/layanan" class="hover:text-orange transition-colors">Layanan</a>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="opacity-50"><path d="m9 18 6-6-6-6"/></svg>
+        <span class="text-ink font-bold">{s.name}</span>
+      </nav>
+
+      <div class="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-16 items-center">
+        <div class="fade-up d1">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-sm border border-orange/20 text-orange text-xs md:text-sm font-bold tracking-wider mb-8 uppercase relative overflow-hidden group">
+            <div class="absolute inset-0 bg-orange/5 group-hover:bg-orange/10 transition-colors"></div>
+            <span class="w-2 h-2 rounded-full bg-orange animate-pulse relative z-10"></span>
+            <span class="relative z-10">{categoryLabel[s.category]} · {s.group}</span>
+          </div>
+          
+          {s.imgIcon && (
+            <div class="mb-6">
+              <img src={s.imgIcon} alt={`Ikon layanan ${s.name}`} class="h-12 md:h-16 w-auto object-contain drop-shadow-sm" fetchpriority="high" width="120" height="64" />
+            </div>
+          )}
+          
+          <h1 class="font-display font-black leading-[1.05] text-ink text-[clamp(2.5rem,5vw,4.5rem)] tracking-tight mb-6">
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#e7c96a] via-[#d4af37] to-[#b5952f]">{s.name}</span>
+          </h1>
+          <p class="text-muted text-lg md:text-xl font-medium leading-relaxed max-w-2xl text-pretty border-l-4 border-[#e7c96a]/40 pl-5">{s.intro}</p>
+
+          <dl class="flex flex-wrap gap-x-10 gap-y-6 mt-10 p-6 rounded-[24px] bg-sand/30 border border-line/50 backdrop-blur-sm">
+            {s.specs.map((sp) => (
+              <div>
+                <dt class="text-[0.75rem] uppercase tracking-[0.15em] font-bold text-orange mb-1.5 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-orange/50"></span>
+                  {sp.label}
+                </dt>
+                <dd class="font-display font-bold text-ink text-lg">{sp.value}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <div class="flex flex-wrap gap-4 mt-10">
+            <a href={wa} target="_blank" rel="noopener noreferrer" class="btn btn--lg bg-gradient-to-r from-[#e7c96a] to-[#b5952f] text-ink hover:text-white border-0 shadow-xl shadow-orange/20 hover:shadow-orange/30 group font-bold">
+              Minta Penawaran
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="group-hover:translate-x-1 transition-transform"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="/layanan" class="btn btn--ghost btn--lg bg-white border-line/60 hover:border-orange/30 hover:bg-orange/5 text-ink font-bold">Semua Layanan</a>
+          </div>
+        </div>
+
+        <div class="relative fade-up d2">
+          <div class={`rounded-[32px] md:rounded-[40px] overflow-hidden ${s.category === 'titip-beli' ? 'aspect-video md:aspect-[4/3]' : 'aspect-square'} bg-sand border-[6px] border-white shadow-xl shadow-ink/5 relative z-10 group`}>
+            <picture>
+              <img src={s.image} alt={`Ilustrasi layanan ${s.name} pengiriman barang import`} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" fetchpriority="high" decoding="async" width="800" height="600" />
+            </picture>
+            <div class="absolute inset-0 bg-gradient-to-t from-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROSES (LIGHT TIMELINE) ───────────────────────────────────── -->
+  <section class="py-20 md:py-32 bg-paper relative overflow-hidden mx-4 md:mx-8 rounded-[40px] md:rounded-[60px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] my-12 border border-line/30">
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-orange/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-[1360px] mx-auto px-4 md:px-8 relative z-10 grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-16 items-start">
+      <div class="fade-up lg:sticky lg:top-32">
+        <p class="font-display font-bold text-sm uppercase tracking-[0.2em] text-orange mb-4 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-orange animate-pulse"></span>
+          Cara Kerja
+        </p>
+        <h2 class="font-display font-black text-[clamp(2.5rem,4vw,3.5rem)] text-ink leading-tight mb-6">Alur Proses <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#e7c96a] to-[#b5952f]">{s.name}</span></h2>
+        <p class="text-muted text-lg leading-relaxed">Kami memastikan setiap tahapan berjalan transparan, aman, dan tepat waktu. Anda cukup memantau dari rumah.</p>
+      </div>
+      
+      <div class="fade-up d1 relative">
+        <!-- Connecting Line -->
+        <div class="absolute left-[38px] top-[40px] bottom-[40px] w-0.5 bg-gradient-to-b from-orange via-orange/20 to-transparent hidden sm:block"></div>
+        
+        <ol class="space-y-8">
+          {s.steps.map((st, i) => (
+            <li class="relative pl-0 sm:pl-28 group">
+              <!-- Number Indicator -->
+              <div class="hidden sm:flex absolute left-0 top-0 w-20 h-20 rounded-[24px] bg-sand border border-line/60 items-center justify-center font-display font-black text-3xl text-muted group-hover:text-orange group-hover:border-orange/30 group-hover:bg-orange/5 transition-all duration-300 shadow-sm z-10">
+                0{i + 1}
+              </div>
+              
+              <!-- Content Card -->
+              <div class="bg-white border border-line/60 p-8 rounded-[32px] shadow-sm group-hover:shadow-xl group-hover:shadow-orange/5 group-hover:border-orange/20 transition-all duration-300 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-orange/5 rounded-bl-[100px] transition-colors group-hover:bg-orange/10"></div>
+                
+                <span class="sm:hidden inline-block font-display font-black text-4xl text-orange/30 mb-4">0{i+1}</span>
+                <h3 class="font-display font-bold text-2xl text-ink mb-3">{st.t}</h3>
+                <p class="text-muted text-lg leading-relaxed">{st.d}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── KEUNGGULAN (BENTO GRID) ────────────────────────────────────────── -->
+  <section class="py-20 md:py-32 bg-sand/30">
+    <div class="max-w-[1360px] mx-auto px-4 md:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
+        <p class="font-display font-bold text-sm uppercase tracking-[0.2em] text-orange mb-4">Keunggulan</p>
+        <h2 class="font-display font-black text-[clamp(2.5rem,4vw,3.5rem)] text-ink leading-[1.1] mb-6">Kenapa memilih <span class="text-gradient-gold">{s.name}?</span></h2>
+      </div>
+      
+      <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 fade-up d1">
+        {s.benefits.map((b, i) => (
+          <li class={`bg-white p-8 md:p-10 rounded-[32px] md:rounded-[40px] border border-line/60 shadow-sm hover:shadow-2xl hover:border-orange/30 hover:shadow-orange/10 transition-all duration-500 group relative overflow-hidden ${s.benefits.length === 4 && i >= 2 ? 'lg:col-span-1.5' : ''}`}>
+            
+            <div class="absolute -right-10 -top-10 w-40 h-40 bg-orange/5 rounded-full blur-[30px] group-hover:bg-orange/10 transition-colors duration-500"></div>
+
+            <span class="grid place-items-center w-14 h-14 rounded-2xl bg-orange/5 text-orange mb-8 group-hover:bg-gradient-to-br group-hover:from-[#e7c96a] group-hover:to-[#b5952f] group-hover:text-white transition-all duration-300">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <h3 class="font-display font-bold text-2xl text-ink mb-4 relative z-10">{b.t}</h3>
+            <p class="text-muted text-lg leading-relaxed relative z-10">{b.d}</p>
+          </li>
+        ))}
+      </ul>
+
+      {s.productCats && s.productCats.length > 0 && (
+        <div class="mt-20 pt-16 border-t border-line/60 fade-up text-center">
+          <p class="font-display font-bold text-sm uppercase tracking-[0.15em] text-ink mb-8">Kategori Barang yang Cocok</p>
+          <div class="flex flex-wrap justify-center gap-4">
+            {s.productCats.map((c) => (
+              <span class="bg-white border border-line/60 rounded-full px-6 py-3 text-base text-ink font-bold shadow-sm hover:border-[#e7c96a] hover:text-[#e7c96a] hover:-translate-y-1 transition-all cursor-default">
+                {c}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- ── FAQ (CENTERED) ──────────────────────────────────────────────────── -->
+  <section class="py-20 md:py-32 bg-paper border-t border-line/30">
+    <div class="max-w-3xl mx-auto px-4 md:px-8">
+      <div class="text-center mb-16 fade-up">
+        <p class="font-display font-bold text-sm uppercase tracking-[0.2em] text-orange mb-4">FAQ</p>
+        <h2 class="font-display font-black text-4xl md:text-5xl text-ink leading-tight">Pertanyaan Seputar <br/><span class="text-gradient-gold">{s.name}</span></h2>
+      </div>
+      <div class="fade-up d1">
+        <Faq items={s.faqs} />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RELATED SERVICES ─────────────────────────────────────────────── -->
+  {related.length > 0 && (
+    <section class="py-20 md:py-32 bg-sand/30 border-t border-line/50">
+      <div class="max-w-[1360px] mx-auto px-4 md:px-8">
+        <div class="flex items-end justify-between mb-12 fade-up">
+          <div>
+            <p class="font-display font-bold text-sm uppercase tracking-[0.2em] text-orange mb-3">Jelajahi</p>
+            <h2 class="font-display font-black text-3xl md:text-4xl text-ink">Layanan <span class="text-gradient-gold">Terkait</span></h2>
+          </div>
+          <a href="/layanan" class="hidden sm:inline-flex items-center gap-2 text-ink font-bold hover:text-orange transition-colors">
+            Lihat Semua
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 fade-up d1">
+          {related.map((r) => (
+            <a href={`/layanan/${r.slug}`} class="bg-white p-8 md:p-10 rounded-[32px] shadow-sm border border-line/60 hover:border-orange/30 hover:shadow-xl hover:shadow-orange/10 hover:-translate-y-2 transition-all duration-300 group">
+              <span class="grid place-items-center w-14 h-14 rounded-2xl bg-orange/5 text-orange mb-6 group-hover:bg-gradient-to-br group-hover:from-[#e7c96a] group-hover:to-[#b5952f] group-hover:text-white transition-all duration-300">
+                {r.imgIcon ? (
+                  <img src={r.imgIcon} alt={`Ikon layanan ${r.name}`} class="w-8 h-8 object-contain drop-shadow-sm group-hover:brightness-0 group-hover:invert transition-all" loading="lazy" width="32" height="32" />
+                ) : (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" set:html={r.icon}></svg>
+                )}
+              </span>
+              <h3 class="font-display font-bold text-2xl text-ink mb-3 group-hover:text-orange transition-colors">{r.name}</h3>
+              <p class="text-muted text-[0.95rem] leading-relaxed">{r.tagline}</p>
+            </a>
+          ))}
+        </div>
+        
+        <div class="mt-8 text-center sm:hidden fade-up d2">
+          <a href="/layanan" class="btn btn--ghost btn--block">Lihat Semua Layanan</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <CtaBand title={`Tertarik dengan ${s.name}?`} text="Kirim detail kebutuhan Anda lewat WhatsApp — kami bantu hitung estimasi dan urus prosesnya." />
+</BaseLayout>

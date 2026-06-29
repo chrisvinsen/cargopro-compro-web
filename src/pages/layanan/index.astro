@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { byCategory, categoryLabel, type Category } from '../../data/services';
+
+const groups: { key: Category; blurb: string }[] = [
+  { key: 'pengiriman', blurb: 'Layanan kargo laut dan udara dari China ke Indonesia, dengan opsi lengkap mulai dari LCL, FCL, hingga pengurusan kepabeanan.' },
+  { key: 'titip-beli', blurb: 'Kami membelikan barang yang Anda inginkan dari berbagai marketplace China terpopuler. Urusan bahasa dan pembayaran kami yang tangani.' },
+  { key: 'pembayaran', blurb: 'Jasa pembayaran ke supplier di China (RMB) dan internasional (USD) dengan kurs yang bersaing dan aman.' },
+];
+---
+
+<BaseLayout
+  title="Daftar Layanan Import & Forwarding China–Indonesia | CargoPro"
+  description="Daftar lengkap layanan CargoPro: kargo laut LCL/FCL & udara, titip beli 1688/Taobao/Alibaba/AliExpress/JD.com, serta transfer RMB & USD."
+  keywords="layanan import china, jasa forwarding china indonesia, titip beli marketplace china, transfer supplier china"
+  path="/layanan"
+>
+  <!-- ── SIMPLE HERO SECTION ──────────────────────────────────────── -->
+  <section class="pt-28 md:pt-36 pb-12 md:pb-16 px-4 md:px-8 bg-paper overflow-hidden relative border-b border-line/30">
+    <!-- Ambient Background Glows -->
+    <div class="absolute top-0 right-1/4 w-[500px] h-[500px] bg-orange/5 rounded-full blur-[100px] -translate-y-1/2 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-[#d4af37]/5 rounded-full blur-[100px] translate-y-1/2 pointer-events-none"></div>
+
+    <div class="max-w-4xl mx-auto relative z-10 text-center fade-up">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm shadow-sm border border-orange/10 text-orange text-sm font-bold tracking-wider mb-6 uppercase">
+        Solusi Logistik Anda
+      </div>
+      
+      <h1 class="font-display font-black leading-[1.1] text-ink mb-6 text-[clamp(2.5rem,4vw,4rem)] tracking-tight">
+        Daftar Layanan <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#e7c96a] to-[#b5952f]">CargoPro</span>
+      </h1>
+      
+      <p class="text-muted text-lg md:text-xl font-medium leading-relaxed max-w-2xl mx-auto">
+        Pilih layanan sesuai kebutuhan — atau gabungkan beberapa sekaligus. Tim kami akan menyusun jalur paling efisien dari China sampai depan pintu Anda.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── SERVICES (STICKY SCROLL LAYOUT) ──────────────────────────── -->
+  <section class="py-20 md:py-32 bg-sand/30 relative">
+    <div class="max-w-[1360px] mx-auto px-4 md:px-8">
+      
+      {groups.map((g, gi) => (
+        <div class="grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-16 items-start mb-24 lg:mb-32 last:mb-0 relative pt-12 lg:pt-0 border-t border-line/50 lg:border-none">
+          
+          <!-- Sticky Category Sidebar -->
+          <div class="lg:sticky lg:top-32 fade-up">
+            <div class="hidden lg:block absolute -left-8 top-0 bottom-0 w-px bg-gradient-to-b from-orange/50 via-orange/10 to-transparent"></div>
+            <p class="font-display font-bold text-sm uppercase tracking-[0.2em] text-orange mb-4 flex items-center gap-3">
+              <span class="w-8 h-px bg-orange/50"></span>
+              Kategori 0{gi + 1}
+            </p>
+            <h2 class="font-display font-black text-4xl lg:text-5xl text-ink leading-tight mb-6">{categoryLabel[g.key]}</h2>
+            <p class="text-muted text-lg leading-relaxed">{g.blurb}</p>
+          </div>
+
+          <!-- Service Cards Grid -->
+          <div class="grid sm:grid-cols-2 gap-6 lg:gap-8 fade-up d1">
+            {byCategory(g.key).map((s) => (
+              <a href={`/layanan/${s.slug}`} class="bg-white p-8 md:p-10 rounded-[32px] shadow-sm border border-line/60 hover:border-orange/30 hover:shadow-2xl hover:shadow-orange/10 hover:-translate-y-2 transition-all duration-500 group flex flex-col relative overflow-hidden h-full">
+                
+                <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-orange/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                <span class="grid place-items-center w-14 h-14 rounded-2xl bg-orange/5 text-orange mb-8 group-hover:bg-gradient-to-br group-hover:from-[#e7c96a] group-hover:to-[#b5952f] group-hover:text-white group-hover:shadow-lg transition-all duration-300 relative z-10 shrink-0">
+                  {s.imgIcon ? (
+                    <img src={s.imgIcon} alt={`Ikon layanan ${s.name}`} class="w-8 h-8 object-contain drop-shadow-sm group-hover:brightness-0 group-hover:invert transition-all" loading="lazy" width="32" height="32" />
+                  ) : (
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" set:html={s.icon}></svg>
+                  )}
+                </span>
+                
+                <h3 class="font-display font-bold text-2xl text-ink group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#e7c96a] group-hover:to-[#b5952f] transition-all mb-4 relative z-10">{s.name}</h3>
+                
+                <p class="text-muted text-lg leading-relaxed flex-1 relative z-10">{s.tagline}</p>
+                
+                <div class="mt-8 pt-6 border-t border-line/60 inline-flex items-center justify-between w-full relative z-10 group/btn">
+                  <span class="text-sm font-display font-bold text-ink group-hover:text-orange transition-colors">Lihat Detail</span>
+                  <span class="w-8 h-8 rounded-full bg-sand flex items-center justify-center text-ink group-hover:bg-orange group-hover:text-white transition-colors">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="group-hover/btn:translate-x-0.5 transition-transform"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+
+        </div>
+      ))}
+
+    </div>
+  </section>
+
+  <CtaBand title="Siap memulai proses impor Anda?" text="Tim kami siap memberikan penawaran terbaik dan panduan lengkap untuk kebutuhan logistik Anda." />
+</BaseLayout>
