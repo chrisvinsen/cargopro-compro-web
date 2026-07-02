@@ -44,17 +44,14 @@ const faqSchema = {
   jsonld={faqSchema}
 >
   <!-- ── REDESIGNED HERO ──────────────────────────────────────── -->
-  <section class="pt-16 md:pt-24 pb-4 lg:pb-8 px-4 md:px-8 bg-paper overflow-hidden relative">
+  <section class="pt-8 md:pt-24 pb-4 lg:pb-8 px-4 md:px-8 bg-paper overflow-hidden relative">
     
-    <!-- Right-Aligned Background Image & Gradient Overlays -->
-    <div class="absolute inset-y-0 right-0 w-full lg:w-[60%] xl:w-[55%] z-0 pointer-events-none">
+    <!-- Right-Aligned Background Image & Gradient Overlays (Desktop Only) -->
+    <div class="absolute inset-y-0 right-0 w-full lg:w-[60%] xl:w-[55%] z-0 pointer-events-none hidden lg:block">
       <img src="/images/hero-main.jpeg" alt="Hero Background" class="w-full h-full object-cover object-center lg:object-left" fetchpriority="high" decoding="async" />
       
       <!-- Gradient overlay to blend the left edge of the image into the paper background -->
       <div class="absolute inset-y-0 left-0 w-48 md:w-64 bg-gradient-to-r from-paper via-paper/80 to-transparent"></div>
-      
-      <!-- Mobile overlay to ensure text legibility -->
-      <div class="absolute inset-0 bg-paper/80 lg:hidden"></div>
       
       <!-- Top gradient for smooth transition from the header -->
       <div class="absolute inset-x-0 top-0 h-24 sm:h-32 lg:h-40 bg-gradient-to-b from-paper via-paper/60 to-transparent"></div>
@@ -77,21 +74,56 @@ const faqSchema = {
           </div>
           
           <!-- Main Heading -->
-          <h1 class="font-display font-black leading-[1.1] text-ink mb-6 max-w-2xl text-[2.8rem] sm:text-[3.5rem] lg:text-[4rem] xl:text-[4.5rem] tracking-tight drop-shadow-sm">
+          <h1 class="relative z-20 font-display font-black leading-[1.1] text-ink mb-6 max-w-2xl text-[2.8rem] sm:text-[3.5rem] lg:text-[4rem] xl:text-[4.5rem] tracking-tight drop-shadow-sm">
             IMPORT CHINA <br />
             TANPA <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#e7c96a] via-[#d4af37] to-[#b5952f]">RIBET.</span>
           </h1>
           
           <!-- Description -->
-          <p class="text-muted text-base sm:text-lg md:text-xl font-medium leading-relaxed max-w-xl mb-8">
+          <p class="text-muted text-base sm:text-lg md:text-xl font-medium leading-relaxed max-w-xl mb-4 relative z-10">
             CargoPro membantu Anda import dari China dengan layanan <span class="font-bold text-ink">ALL-IN Door-to-Door</span>. Aman, cepat, dan terpercaya.
           </p>
           
+          <!-- CTA Buttons -->
+          <div class="flex flex-row gap-2 sm:gap-4 w-full sm:w-auto mb-10 z-20 relative">
+            <a href={wa} target="_blank" rel="noopener noreferrer" class="btn btn--lg bg-gradient-to-r from-[#e7c96a] to-[#b5952f] text-white hover:brightness-110 hover:-translate-y-1 border-0 shadow-xl shadow-orange/20 flex flex-row items-center justify-center gap-1.5 sm:gap-4 px-2 sm:px-6 py-3 w-[55%] sm:w-auto rounded-xl group transition-all duration-300">
+              <svg class="w-5 h-5 sm:w-7 sm:h-7 shrink-0 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              <div class="text-left">
+                <div class="sm:hidden font-bold text-[13px] leading-tight">Konsultasi Gratis</div>
+                <div class="hidden sm:block">
+                  <div class="font-bold text-lg leading-tight">Konsultasi Gratis</div>
+                  <div class="text-xs opacity-80 font-medium">Chat via WhatsApp</div>
+                </div>
+              </div>
+            </a>
+            
+            <a href="/lacak" class="btn btn--lg bg-white border border-line text-ink hover:border-orange hover:shadow-md flex flex-row items-center justify-center gap-1.5 sm:gap-4 px-2 sm:px-6 py-3 w-[45%] sm:w-auto rounded-xl transition-all group">
+              <svg class="w-5 h-5 sm:w-7 sm:h-7 shrink-0 text-muted group-hover:text-orange transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <div class="text-left">
+                <div class="sm:hidden font-bold text-[13px] leading-tight group-hover:text-orange transition-colors">Live Tracking</div>
+                <div class="hidden sm:block">
+                  <div class="font-bold text-lg leading-tight group-hover:text-orange transition-colors">Live Tracking</div>
+                  <div class="text-xs text-muted font-medium">Pantau Status Barang</div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Mobile Inline Image (Mobile Only) -->
+          <div class="block lg:hidden w-[100vw] relative left-1/2 -translate-x-1/2 -mt-52 mb-4 overflow-hidden pointer-events-none z-0">
+            <img src="/images/hero-main.jpeg" alt="Hero Background Mobile" class="w-full min-h-[480px] h-auto object-cover object-center" fetchpriority="high" decoding="async" />
+            <div class="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-paper via-paper/70 to-transparent"></div>
+            <div class="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-paper via-paper/60 to-transparent"></div>
+          </div>
+
           <!-- Checklist -->
-          <ul class="flex flex-col gap-3 mb-10">
+          <ul class="grid grid-cols-2 sm:flex sm:flex-col gap-2 sm:gap-3 mb-10 relative z-20">
             {['Door to Door ALL-IN', 'SEA & AIR Freight', 'Pembayaran RMB', 'Supplier Sourcing'].map((item) => (
-              <li class="flex items-center gap-3 text-ink font-medium text-base sm:text-lg">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-[#d4af37] shrink-0">
+              <li class="flex items-center gap-1.5 sm:gap-3 text-ink font-medium text-[13px] sm:text-lg leading-tight">
+                <svg viewBox="0 0 24 24" fill="none" class="w-4 h-4 sm:w-6 sm:h-6 text-[#d4af37] shrink-0">
                   <circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.2"/>
                   <path d="M8 12.5L10.5 15L16 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -99,28 +131,6 @@ const faqSchema = {
               </li>
             ))}
           </ul>
-          
-          <!-- CTA Buttons -->
-          <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-10 z-20 relative">
-            <a href={wa} target="_blank" rel="noopener noreferrer" class="btn btn--lg bg-gradient-to-r from-[#e7c96a] to-[#b5952f] text-white hover:brightness-110 hover:-translate-y-1 border-0 shadow-xl shadow-orange/20 flex flex-row items-center justify-center gap-4 text-left px-6 py-3 w-full sm:w-auto rounded-xl group transition-all duration-300">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:scale-110 transition-transform shrink-0"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-              <div>
-                <div class="font-bold text-lg leading-tight">Konsultasi Gratis</div>
-                <div class="text-xs opacity-80 font-medium">Chat via WhatsApp</div>
-              </div>
-            </a>
-            
-            <a href="/lacak" class="btn btn--lg bg-white border border-line text-ink hover:border-orange hover:shadow-md flex flex-row items-center justify-center gap-4 text-left px-6 py-3 w-full sm:w-auto rounded-xl transition-all group">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted group-hover:text-orange transition-colors shrink-0">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              <div>
-                <div class="font-bold text-lg leading-tight group-hover:text-orange transition-colors">Live Tracking</div>
-                <div class="text-xs text-muted font-medium">Pantau Status Barang</div>
-              </div>
-            </a>
-          </div>
 
           <!-- Trust / Social Proof -->
           <div class="flex items-center gap-4">
@@ -152,45 +162,45 @@ const faqSchema = {
 
       <!-- ── TRUST BADGES BAR ──────────────────────────────────────── -->
       <div class="mt-10 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl shadow-ink/5 border border-line/50 p-6 md:p-8 relative z-20">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-line/50">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 divide-none lg:divide-x divide-line/50">
           
-          <div class="flex items-center gap-4 pt-4 sm:pt-0 sm:px-4 lg:px-6 first:pt-0 first:px-0">
+          <div class="flex items-center gap-4">
             <div class="w-12 h-12 rounded-full bg-sand flex items-center justify-center shrink-0">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-ink"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
             </div>
             <div>
-              <h4 class="font-bold text-ink mb-0.5">Aman & Bergaransi</h4>
-              <p class="text-xs text-muted">Barang Anda kami lindungi</p>
+              <h4 class="font-bold text-ink mb-0.5 leading-tight text-sm lg:text-base">Aman & Bergaransi</h4>
+              <p class="text-xs text-muted">Dilindungi penuh</p>
             </div>
           </div>
           
-          <div class="flex items-center gap-4 pt-4 sm:pt-0 sm:px-4 lg:px-6">
+          <div class="flex items-center gap-4 lg:px-6">
             <div class="w-12 h-12 rounded-full bg-sand flex items-center justify-center shrink-0">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-ink"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
             </div>
             <div>
-              <h4 class="font-bold text-ink mb-0.5">Tepat Waktu</h4>
-              <p class="text-xs text-muted">Estimasi jelas & on-time</p>
+              <h4 class="font-bold text-ink mb-0.5 leading-tight text-sm lg:text-base">Tepat Waktu</h4>
+              <p class="text-xs text-muted">Estimasi jelas</p>
             </div>
           </div>
           
-          <div class="flex items-center gap-4 pt-4 sm:pt-0 sm:px-4 lg:px-6">
+          <div class="flex items-center gap-4 lg:px-6">
             <div class="w-12 h-12 rounded-full bg-sand flex items-center justify-center shrink-0">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-ink"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
             </div>
             <div>
-              <h4 class="font-bold text-ink mb-0.5">Fast Response</h4>
-              <p class="text-xs text-muted">Respon cepat &lt; 5 menit</p>
+              <h4 class="font-bold text-ink mb-0.5 leading-tight text-sm lg:text-base">Fast Response</h4>
+              <p class="text-xs text-muted">Respon cepat</p>
             </div>
           </div>
           
-          <div class="flex items-center gap-4 pt-4 sm:pt-0 sm:px-4 lg:px-6">
+          <div class="flex items-center gap-4 lg:px-6">
             <div class="w-12 h-12 rounded-full bg-sand flex items-center justify-center shrink-0">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-ink"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
             </div>
             <div>
-              <h4 class="font-bold text-ink mb-0.5">Door-to-Door All-In</h4>
-              <p class="text-xs text-muted">Sampai ke gudang Anda</p>
+              <h4 class="font-bold text-ink mb-0.5 leading-tight text-sm lg:text-base">Door-to-Door</h4>
+              <p class="text-xs text-muted">Layanan All-In</p>
             </div>
           </div>
 
@@ -273,10 +283,10 @@ const faqSchema = {
         </div>
         </div>
 
-      <div class="flex flex-nowrap md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none pb-12 pt-4 hide-scrollbar -mx-4 px-4 md:mx-0 md:px-0">
+      <div class="flex flex-nowrap md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none pb-12 pt-4 hide-scrollbar -mx-4 px-4 md:mx-0 md:px-0 fade-up">
           
           <!-- Service 1: LCL -->
-          <a href="/layanan/kargo-laut-lcl" class="w-[85vw] sm:w-[380px] md:w-auto shrink-0 md:shrink snap-start group block relative focus-visible:outline-none fade-up d1">
+          <a href="/layanan/kargo-laut-lcl" class="w-[85vw] sm:w-[380px] md:w-auto shrink-0 md:shrink snap-start group block relative focus-visible:outline-none">
             <div class="bg-white rounded-[32px] p-4 border border-line hover:border-orange/30 shadow-sm hover:shadow-xl hover:shadow-orange/10 transition-all duration-500 h-full flex flex-col">
               <div class="h-[240px] rounded-[24px] overflow-hidden mb-6 relative">
                 <img src="/images/service-sea-lcl.jpg" width="400" height="300" loading="lazy" decoding="async" alt="Layanan pengiriman kargo laut LCL" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -293,7 +303,7 @@ const faqSchema = {
           </a>
 
           <!-- Service 2: FCL -->
-          <a href="/layanan/kargo-laut-fcl" class="w-[85vw] sm:w-[380px] md:w-auto shrink-0 md:shrink snap-start group block relative focus-visible:outline-none fade-up d2">
+          <a href="/layanan/kargo-laut-fcl" class="w-[85vw] sm:w-[380px] md:w-auto shrink-0 md:shrink snap-start group block relative focus-visible:outline-none">
             <div class="bg-white rounded-[32px] p-4 border border-line hover:border-orange/30 shadow-sm hover:shadow-xl hover:shadow-orange/10 transition-all duration-500 h-full flex flex-col">
               <div class="h-[240px] rounded-[24px] overflow-hidden mb-6 relative">
                 <img src="/images/service-sea-fcl.jpg" width="400" height="300" loading="lazy" decoding="async" alt="Layanan pengiriman kargo laut FCL" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -310,7 +320,7 @@ const faqSchema = {
           </a>
 
           <!-- Service 3: Air Freight -->
-          <a href="/layanan/kargo-udara" class="w-[85vw] sm:w-[380px] md:w-auto shrink-0 md:shrink snap-start group block relative focus-visible:outline-none fade-up d3">
+          <a href="/layanan/kargo-udara" class="w-[85vw] sm:w-[380px] md:w-auto shrink-0 md:shrink snap-start group block relative focus-visible:outline-none">
             <div class="bg-white rounded-[32px] p-4 border border-line hover:border-orange/30 shadow-sm hover:shadow-xl hover:shadow-orange/10 transition-all duration-500 h-full flex flex-col">
               <div class="h-[240px] rounded-[24px] overflow-hidden mb-6 relative">
                 <img src="/images/service-air-freight.jpg" width="400" height="300" loading="lazy" decoding="async" alt="Layanan pengiriman kargo udara express" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -327,7 +337,7 @@ const faqSchema = {
           </a>
 
           <!-- Service 4: Jasa Belanja -->
-          <a href="/layanan/titip-beli-1688" class="w-[85vw] sm:w-[380px] md:w-auto shrink-0 md:shrink snap-start group block relative focus-visible:outline-none fade-up d4">
+          <a href="/layanan/titip-beli-1688" class="w-[85vw] sm:w-[380px] md:w-auto shrink-0 md:shrink snap-start group block relative focus-visible:outline-none">
             <div class="bg-white rounded-[32px] p-4 border border-line hover:border-orange/30 shadow-sm hover:shadow-xl hover:shadow-orange/10 transition-all duration-500 h-full flex flex-col">
               <div class="h-[240px] rounded-[24px] overflow-hidden mb-6 relative">
                 <img src="/images/service-jasa-belanja.jpg" width="400" height="300" loading="lazy" decoding="async" alt="Jasa titip beli dari e-commerce China" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -344,7 +354,7 @@ const faqSchema = {
           </a>
 
           <!-- Service 5: Transfer RMB -->
-          <a href="/layanan/transfer-rmb" class="w-[85vw] sm:w-[380px] md:w-auto shrink-0 md:shrink snap-start group block relative focus-visible:outline-none fade-up d1">
+          <a href="/layanan/transfer-rmb" class="w-[85vw] sm:w-[380px] md:w-auto shrink-0 md:shrink snap-start group block relative focus-visible:outline-none">
             <div class="bg-white rounded-[32px] p-4 border border-line hover:border-orange/30 shadow-sm hover:shadow-xl hover:shadow-orange/10 transition-all duration-500 h-full flex flex-col">
               <div class="h-[240px] rounded-[24px] overflow-hidden mb-6 relative">
                 <img src="/images/payment.jpg" width="400" height="300" loading="lazy" decoding="async" alt="Layanan transfer pembayaran RMB ke supplier di China" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -361,7 +371,7 @@ const faqSchema = {
           </a>
 
           <!-- Service 6: Sea Express -->
-          <a href="/layanan/kargo-laut-express" class="w-[85vw] sm:w-[380px] md:w-auto shrink-0 md:shrink snap-start group block relative focus-visible:outline-none fade-up d2">
+          <a href="/layanan/kargo-laut-express" class="w-[85vw] sm:w-[380px] md:w-auto shrink-0 md:shrink snap-start group block relative focus-visible:outline-none">
             <div class="bg-white rounded-[32px] p-4 border border-line hover:border-orange/30 shadow-sm hover:shadow-xl hover:shadow-orange/10 transition-all duration-500 h-full flex flex-col">
               <div class="h-[240px] rounded-[24px] overflow-hidden mb-6 relative">
                 <img src="/images/service-sea-express.jpg" width="400" height="300" loading="lazy" decoding="async" alt="Layanan pengiriman kargo laut prioritas atau Sea Freight Express" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
