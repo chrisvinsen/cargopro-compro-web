@@ -13,7 +13,7 @@ export const siteConfig = {
 
   contact: {
     whatsapp: {
-      primary: { number: '6285284578374', display: '085284578374' },
+      primary: { number: '6281387787801', display: '0813-8778-7801' },
     },
     email: { cs: 'cargopro.id@gmail.com' },
     address: {
