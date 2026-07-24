@@ -111,19 +111,25 @@ const stages = [
     </div>
   </section>
 
-  <script is:inline>
-    (() => {
-      const f = document.getElementById('lacakForm');
-      const res = document.getElementById('lacakResult');
-      const btnWa = document.getElementById('btnHubungiCS');
-      
-      if (!f || !res || !btnWa) return;
-      
+  <script>
+    import { trackEvent } from '../utils/mixpanel';
+
+    const f = document.getElementById('lacakForm') as HTMLFormElement | null;
+    const res = document.getElementById('lacakResult');
+    const btnWa = document.getElementById('btnHubungiCS');
+
+    if (f && res && btnWa) {
       f.addEventListener('submit', (e) => {
         e.preventDefault();
-        const resi = (document.getElementById('resi')?.value || '').trim();
+        const resi = ((document.getElementById('resi') as HTMLInputElement)?.value || '').trim();
         if (!resi) { f.reportValidity(); return; }
-        
+
+        trackEvent('Form Submitted', {
+          form_name: 'Track Receipt',
+          tracking_number: resi,
+          page_path: window.location.pathname
+        });
+
         // Show premium result block instead of directly redirecting
         res.classList.remove('hidden');
         // Trigger animation
@@ -132,10 +138,18 @@ const stages = [
 
       btnWa.addEventListener('click', () => {
         const num = f.getAttribute('data-wa');
-        const resi = (document.getElementById('resi')?.value || '').trim();
+        const resi = ((document.getElementById('resi') as HTMLInputElement)?.value || '').trim();
+        
+        trackEvent('CTA Clicked', {
+          type: 'WhatsApp',
+          source: 'Track Result CS Link',
+          tracking_number: resi,
+          page_path: window.location.pathname
+        });
+
         const msg = `Halo CargoPro, mohon bantu cek status kiriman saya dengan resi/marking: ${resi}`;
         window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`, '_blank');
       });
-    })();
+    }
   </script>
 </BaseLayout>
