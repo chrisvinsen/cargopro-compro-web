@@ -1,58 +1,28 @@
 # CargoPro — Jasa Import China ke Indonesia
 
-> CargoPro adalah perusahaan jasa import dan forwarder China–Indonesia. Kami menangani pembelian (titip beli), pengiriman kargo laut & udara, dan pembayaran ke supplier — dalam satu pintu. Slogan: "Speed You Can Trust".
+> CargoPro adalah perusahaan jasa import dan forwarder China–Indonesia. Kami menangani pengiriman kargo laut & udara, titip beli (sourcing), dan transfer pembayaran ke supplier — dalam satu pintu. Slogan: "Speed You Can Trust".
 
+## Core Services
 
-## Layanan (URL: /layanan/<slug>)
+- [Kargo Laut LCL](https://cargopro.id/layanan/kargo-laut-lcl): Bayar per CBM, estimasi 3–4 minggu, min 0,1 CBM.
+- [Kargo Laut FCL](https://cargopro.id/layanan/kargo-laut-fcl): 1 kontainer penuh 20ft/40ft/40HQ, estimasi 3–4 minggu.
+- [Laut Express](https://cargopro.id/layanan/kargo-laut-express): Jalur laut prioritas, estimasi 10–15 hari.
+- [Kargo Udara](https://cargopro.id/layanan/kargo-udara): Estimasi 7–8 hari, min 1 kg.
+- [Titip Beli 1688](https://cargopro.id/layanan/titip-beli-1688): Grosir pabrik langsung dari 1688.com.
+- [Titip Beli Taobao](https://cargopro.id/layanan/titip-beli-taobao): Belanja produk eceran & unik dari Taobao.
+- [Titip Beli Alibaba](https://cargopro.id/layanan/titip-beli-alibaba): Sourcing B2B & OEM/ODM Alibaba.
+- [Transfer RMB](https://cargopro.id/layanan/transfer-rmb): Bayar supplier China dalam Yuan (RMB).
 
-Pengiriman Kargo:
-- **Kargo Laut LCL** (/layanan/kargo-laut-lcl) — bayar per CBM, estimasi 3–4 minggu, mulai 0,1 CBM.
-- **Kargo Laut FCL** (/layanan/kargo-laut-fcl) — 1 kontainer penuh 20ft/40ft/40HQ, estimasi 3–4 minggu.
-- **Laut Express** (/layanan/kargo-laut-express) — jalur laut prioritas, estimasi 10–15 hari.
-- **Kargo Udara** (/layanan/kargo-udara) — estimasi 7–8 hari, mulai 1 kg.
+## Key Pages & Navigation
 
-Titip Beli (marketplace China):
-- **1688** (/layanan/titip-beli-1688) — grosir pabrik.
-- **Taobao** (/layanan/titip-beli-taobao) — eceran & produk unik.
-- **Alibaba** (/layanan/titip-beli-alibaba) — sourcing B2B & OEM/ODM.
-- **AliExpress** (/layanan/titip-beli-aliexpress) — konsolidasi paket hemat ongkir.
-- **JD.com** (/layanan/titip-beli-jdcom) — elektronik original.
+- [Beranda CargoPro](https://cargopro.id): Halaman utama layanan import China CargoPro.
+- [Semua Layanan](https://cargopro.id/layanan): Detail katalog seluruh layanan kargo & titip beli.
+- [Tentang Kami](https://cargopro.id/tentang): Profil & keunggulan CargoPro.
+- [Lacak Kiriman](https://cargopro.id/lacak): Fitur cek resi & tracking status pengiriman.
+- [FAQ](https://cargopro.id/faq): Pertanyaan umum seputar bea masuk, estimasi, dan regulasi.
+- [Kontak](https://cargopro.id/kontak): Halaman kontak & lokasi gudang.
 
-Pembayaran:
-- **Transfer RMB** (/layanan/transfer-rmb) — bayar supplier China dalam Yuan.
-- **Transfer USD** (/layanan/transfer-usd) — pembayaran internasional dalam Dolar AS.
+## Contact & Social Links
 
-## Halaman Lain
-
-- Beranda: /
-- Semua layanan: /layanan
-- Tentang: /tentang
-- Lacak kiriman: /lacak
-- FAQ: /faq
-- Kontak: /kontak
-
-## Cakupan
-
-- Door-to-door ke seluruh Indonesia.
-- Gudang konsolidasi di China: Guangzhou, Yiwu, Shenzhen.
-- Bahasa tim: Indonesia, Mandarin, English.
-
-## Cara Memulai
-
-1. Hubungi via WhatsApp dengan link produk atau detail barang.
-2. Terima estimasi biaya dan jalur kirim yang disarankan.
-3. Pembayaran dalam Rupiah ke rekening CargoPro.
-4. Barang dibeli/dijemput, dikirim, dan kepabeanan diurus.
-5. Diantar sampai alamat tujuan.
-
-## Kontak
-
-- WhatsApp: +62 852 8457 8374
-- Email: cargopro.id@gmail.com
-- Website: https://cargopro.id
-
-## Yang TIDAK Kami Layani
-
-- Barang ilegal (senjata, narkotika, pornografi, satwa/tumbuhan dilindungi).
-- Barang melanggar HAKI (replika merek).
-- Skema "import tanpa pajak" — semua import diproses resmi dengan dokumen pabean lengkap.
+- [Official Website](https://cargopro.id): Website resmi CargoPro.
+- [WhatsApp Support](https://wa.me/6285284578374): Customer Service CargoPro (+62 852-8457-8374).
