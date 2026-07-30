@@ -33,7 +33,7 @@ const orgSchema = {
   '@id': `${siteConfig.url}/#organization`,
   name: siteConfig.name,
   url: siteConfig.url,
-  logo: `${siteConfig.url}/logo-cargopro-transparent.png`,
+  logo: `${siteConfig.url}/logo-cargopro-transparent-horizontal.webp`,
   description: siteConfig.description,
   slogan: 'Speed You Can Trust',
   contactPoint: {
@@ -66,12 +66,33 @@ const ld = { '@context': 'https://schema.org', '@graph': graph };
 <!doctype html>
 <html lang="id">
   <head>
-    <!-- Google Tag Manager -->
-    <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-P744HQLJ');</script>
+    <!-- Google Tag Manager (Deferred to eliminate main-thread blocking) -->
+    <script is:inline>
+      (() => {
+        window.dataLayer = window.dataLayer || [];
+        let loaded = false;
+        const loadGTM = () => {
+          if (loaded) return;
+          loaded = true;
+          window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+          const j = document.createElement('script');
+          j.async = true;
+          j.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-P744HQLJ';
+          document.head.appendChild(j);
+        };
+        const events = ['pointerdown', 'touchstart', 'keydown', 'scroll'];
+        const trigger = () => {
+          loadGTM();
+          events.forEach((e) => window.removeEventListener(e, trigger));
+        };
+        events.forEach((e) => window.addEventListener(e, trigger, { passive: true }));
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(() => setTimeout(loadGTM, 3500));
+        } else {
+          setTimeout(loadGTM, 3500);
+        }
+      })();
+    </script>
     <!-- End Google Tag Manager -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -164,9 +185,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         els.forEach((e) => io.observe(e));
       })();
     </script>
-    <!-- Analytics and Global Event Tracking -->
+    <!-- Analytics and Global Event Tracking (Deferred) -->
     <script>
-      setTimeout(async () => {
+      const initAnalytics = async () => {
         const { trackPageView, trackEvent } = await import('../utils/mixpanel');
 
         // 1. Track Page View
@@ -304,7 +325,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
           });
         });
-      }, 500);
+      };
+
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => setTimeout(initAnalytics, 2000));
+      } else {
+        setTimeout(initAnalytics, 2500);
+      }
     </script>
   </body>
 </html>

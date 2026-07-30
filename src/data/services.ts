@@ -57,7 +57,7 @@ export const services: Service[] = [
     group: 'Kargo Laut',
     name: 'Kargo Laut LCL',
     tagline: 'Bayar sesuai volume (CBM), tanpa sewa kontainer penuh.',
-    image: '/images/service-sea-lcl.jpg',
+    image: '/images/service-sea-lcl.webp',
     icon: '<path d="M2 21c.6.5 1.2 1 2.5 1 1.3 0 1.9-.5 2.5-1 .6-.5 1.2-1 2.5-1 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 1.3 0 1.9-.5 2.5-1 .6-.5 1.2-1 2.5-1 1.3 0 1.9.5 2.5 1"/><path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"/><path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"/><path d="M12 10v4"/><path d="M12 2v3"/>',
     intro:
       'Cara paling efisien kirim barang jumlah kecil-menengah. Kiriman akan digabung di gudang China, lalu diantar aman sampai alamat Anda di Indonesia.',
@@ -96,7 +96,7 @@ export const services: Service[] = [
     group: 'Kargo Laut',
     name: 'Kargo Laut FCL',
     tagline: 'Satu kontainer penuh khusus barang Anda — aman & efisien.',
-    image: '/images/service-sea-fcl.jpg',
+    image: '/images/service-sea-fcl.webp',
     icon: '<path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/>',
     intro:
       'Sewa satu kontainer penuh khusus untuk Anda. Pilihan terbaik bagi importir partai besar dengan keamanan maksimal dan proses pengiriman lebih cepat.',
@@ -135,7 +135,7 @@ export const services: Service[] = [
     group: 'Kargo Laut',
     name: 'Laut Express',
     tagline: 'Jalur laut prioritas — lebih cepat dari LCL reguler.',
-    image: '/images/service-sea-express.jpg',
+    image: '/images/service-sea-express.webp',
     icon: '<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>',
     intro:
       'Jalur laut prioritas dengan kapal direct tanpa transit. Solusi tepat untuk pengiriman lebih cepat dengan biaya yang tetap sehemat sea freight biasa.',
@@ -173,7 +173,7 @@ export const services: Service[] = [
     group: 'Kargo Udara',
     name: 'Kargo Udara',
     tagline: 'Untuk barang mendesak — tiba dalam hitungan hari.',
-    image: '/images/service-air-freight.jpg',
+    image: '/images/service-air-freight.webp',
     icon: '<path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.2-1.1.6L3 8l6 3.5L7 15l-3.5-1.5L2 15l4 4 4-1.5L13.5 15l3.5 6 1.2-.7c.4-.2.7-.6.6-1.1Z"/>',
     intro:
       'Solusi tercepat untuk barang mendesak. Sangat ideal untuk pengiriman sampel produk, elektronik bernilai tinggi, atau stok yang harus segera dijual.',

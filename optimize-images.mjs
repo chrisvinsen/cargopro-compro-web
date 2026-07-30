@@ -9,10 +9,17 @@ import { dirname, join } from 'node:path';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), 'public');
 
 const targets = [
+  // Root brand logos & avatars
+  { src: 'logo-cargopro-transparent-horizontal.png', resize: 400 },
+  { src: 'logo-cargopro-circle.png', resize: 120 },
+  { src: 'logo-cargopro-transparent.png', resize: 400 },
   // Hero card LCP images — displayed ~210x210 max, so 420 = 2x retina is plenty
+  { src: 'images/hero-main.jpeg', resize: 1200 },
+  { src: 'images/hero-cargo-ship.jpg', resize: 1000 },
+  { src: 'images/hero-china-shopping.webp', resize: 300 },
   { src: 'home/service-sea-2.png', resize: 420 },
   { src: 'home/service-air-2.png', resize: 420 },
-  // Other home images used elsewhere on the site (kept at native size by default)
+  // Other home images used elsewhere on the site
   { src: 'home/service-sea-3.png', resize: 800 },
   { src: 'home/service-sea-4.png', resize: 800 },
   { src: 'home/multiple-container.png', resize: 800 },
@@ -21,22 +28,28 @@ const targets = [
   { src: 'home/service-sea.png', resize: 800 },
   { src: 'home/service-air.png', resize: 800 },
   // Comparison images on jasa-belanja pages
-  { src: 'jasa-belanja/compare-1688.png', resize: 800 },
-  { src: 'jasa-belanja/compare-alibaba.png', resize: 800 },
-  { src: 'jasa-belanja/compare-aliexpress.png', resize: 800 },
-  { src: 'jasa-belanja/compare-jdcom.png', resize: 800 },
-  { src: 'jasa-belanja/compare-taobao.png', resize: 800 },
+  { src: 'jasa-belanja/compare-1688.png', resize: 600 },
+  { src: 'jasa-belanja/compare-alibaba.png', resize: 600 },
+  { src: 'jasa-belanja/compare-aliexpress.png', resize: 600 },
+  { src: 'jasa-belanja/compare-jdcom.png', resize: 600 },
+  { src: 'jasa-belanja/compare-taobao.png', resize: 600 },
   // Public root comparison images
-  { src: 'compare-electronics.png', resize: 800 },
-  { src: 'compare-fashion.png', resize: 800 },
-  // Public root service photos (Services / HowItWorks below-fold)
+  { src: 'compare-electronics.png', resize: 600 },
+  { src: 'compare-fashion.png', resize: 600 },
+  // Public service photos (Services / HowItWorks)
+  { src: 'images/service-sea-lcl.jpg', resize: 640 },
+  { src: 'images/service-sea-fcl.jpg', resize: 640 },
+  { src: 'images/service-sea-express.jpg', resize: 640 },
+  { src: 'images/service-air-freight.jpg', resize: 640 },
+  { src: 'images/service-jasa-belanja.jpg', resize: 640 },
+  { src: 'images/payment.jpg', resize: 640 },
   { src: 'service-sea-lcl.jpg', resize: 640 },
   { src: 'service-sea-fcl.jpg', resize: 640 },
   { src: 'service-sea-express.jpg', resize: 640 },
   { src: 'service-air.jpg', resize: 640 },
   { src: 'service-jasa-belanja.jpg', resize: 640 },
   { src: 'service-titip-transfer.jpg', resize: 640 },
-  { src: 'hero-1.jpg', resize: 1600 },
+  { src: 'hero-1.jpg', resize: 1200 },
 ];
 
 async function size(p) {
