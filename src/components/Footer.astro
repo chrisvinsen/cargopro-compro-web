@@ -3,7 +3,7 @@ import { siteConfig } from '../config/site';
 import { byCategory, categoryLabel, type Category } from '../data/services';
 
 const wa = `https://wa.me/${siteConfig.contact.whatsapp.primary.number}?text=${encodeURIComponent('Halo CargoPro, saya ingin bertanya.')}`;
-const groups: Category[] = ['pengiriman', 'titip-beli', 'pembayaran'];
+const groups: Category[] = ['pengiriman', 'pembayaran'];
 const company = [
   { href: '/tentang', label: 'Tentang Kami' },
   { href: '/layanan', label: 'Semua Layanan' },
@@ -36,7 +36,7 @@ const social = [
           <img src="/logo-cargopro-transparent-horizontal.webp" width="180" height="44" alt={`Logo ${siteConfig.name}`} class="h-9 md:h-11 w-auto brightness-0 invert opacity-90 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
         </a>
         <p class="text-[0.95rem] text-white/50 leading-relaxed mb-10 max-w-sm">
-          Menyediakan solusi logistik terintegrasi untuk pengiriman kargo, titip beli, dan pembayaran supplier dari China ke Indonesia. Cepat, aman, dan transparan.
+          Menyediakan solusi logistik terintegrasi untuk pengiriman kargo dan pembayaran supplier dari China ke Indonesia. Cepat, aman, dan transparan.
         </p>
         <div class="flex gap-4 mt-auto">
           {social.map((s) => (
